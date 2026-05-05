@@ -14,7 +14,17 @@ test('Login thành công với account hợp lệ', async ({ browser }) => {
 
   await page.fill('input[type="email"]', 'cn7@mailinator.com');
   await page.fill('input[type="password"]', '123456789');
-  await page.click('button[type="submit"]');
+  const start = Date.now();
 
-  await expect(page).toHaveURL(/.*mypage.*/);
+  await Promise.all([
+    page.waitForURL(/.*mypage.*/),
+    page.locator('button[type="submit"], input[type="submit"]').click(),
+  ]);
+  // loading xong mypage
+  await expect(page.locator('body')).toContainText(/キープ中|各種設定/); // đợit text hiển thị 
+  await page.waitForLoadState('networkidle');
+  const fullyLoaded = Date.now();
+  console.log(`Mypage login to fully loaded time: ${fullyLoaded - start} ms`);
+  await context.close();
+
 });
