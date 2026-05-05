@@ -26,5 +26,6 @@ test('Login thành công với account hợp lệ', async ({ browser }) => {
   const fullyLoaded = Date.now();
   console.log(`Mypage login to fully loaded time: ${fullyLoaded - start} ms`);
   await context.close();
+  // check login có ok ko 
 
 });
