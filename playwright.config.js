@@ -31,6 +31,16 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    /* Record video for each test. Videos are saved under `test-results/videos/`. */
+    video: 'on',
+    /* Save screenshots only on failure to reduce noise. */
+    screenshot: 'only-on-failure',
+    /* Ensure browser contexts record video into a dedicated folder. */
+    contextOptions: {
+      recordVideo: {
+        dir: 'test-results/videos/'
+      }
+    },
   },
 
   /* Configure projects for major browsers */
